@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>F&P Legaltec — Derecho y Tecnología</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js"></script>
+<style>
+/* ── RESET ──────────────────────────────────── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', 'Helvetica Neue', sans-serif;
+  color: #1a2030;
+  background: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── TOKENS ─────────────────────────────────── */
+:root {
+  --copper:        #c98b62;
+  --copper-gold:   #c9a84c;
+  --copper-dark:   #b07048;
+  --copper-light:  #e5bc9a;
+  --copper-pale:   #fdf5ed;
+  --slate-950:     #141924;
+  --slate-900:     #1b2335;
+  --slate-800:     #252f40;
+  --slate-750:     #2d3a4e;
+  --slate-700:     #354460;
+  --slate-600:     #4a5a76;
+  --slate-300:     #aab5c5;
+  --white:         #ffffff;
+  --parchment:     #f5f2ed;
+  --ink:           #1a2030;
+  --ink-60:        rgba(26,32,48,0.60);
+  --ink-40:        rgba(26,32,48,0.40);
+  --ink-10:        rgba(26,32,48,0.10);
+  --ink-06:        rgba(26,32,48,0.06);
+  --font-display:  'Cormorant Garamond', Georgia, serif;
+  --font-body:     'Inter', sans-serif;
+  --font-mono:     'SF Mono', 'Fira Code', 'Consolas', monospace;
+  --radius-pill:   980px;
+  --radius-card:   18px;
+}
+
+/* ── UTILITIES ──────────────────────────────── */
+.container { max-width: 1120px; margin: 0 auto; padding: 0 40px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-body); cursor: pointer;
+  border: none; text-decoration: none;
+  transition: all 0.18s ease;
+}
+.btn:active { transform: scale(0.97); }
+.btn-primary {
+  background: var(--copper); color: white;
+  font-size: 16px; font-weight: 400; letter-spacing: -0.01em;
+  padding: 13px 28px; border-radius: var(--radius-pill);
+}
+.btn-primary:hover { background: var(--copper-dark); }
+.btn-ghost-white {
+  background: transparent; color: white;
+  font-size: 15px; font-weight: 400;
+  padding: 12px 26px; border-radius: var(--radius-pill);
+  border: 1px solid rgba(255,255,255,0.28);
+}
+.btn-ghost-white:hover { background: rgba(255,255,255,0.08); }
+.section-label {
+  font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.13em;
+  color: var(--copper); margin-bottom: 12px;
+  display: block;
+}
+
+/* ── NAV ────────────────────────────────────── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: rgba(20,25,36,0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  height: 56px;
+  display: flex; align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  transition: background 0.2s, border-color 0.2s;
+}
+.nav-inner {
+  max-width: 1120px; margin: 0 auto; padding: 0 40px;
+  display: flex; align-items: center; gap: 28px; width: 100%;
+}
+.nav-logo {
+  font-family: var(--font-display);
+  color: #c9a84c; font-size: 19px; font-weight: 600;
+  letter-spacing: -0.01em; white-space: nowrap; text-decoration: none;
+  display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+}
+.nav-logo img { height: 30px; }
+.nav-links { display: flex; gap: 22px; flex: 1; }
+.nav-link {
+  color: rgba(255,255,255,0.68); font-size: 13px;
+  font-weight: 400; letter-spacing: -0.01em;
+  text-decoration: none; cursor: pointer;
+  transition: color 0.15s; white-space: nowrap;
+}
+.nav-link:hover { color: white; }
+.nav-cta {
+  background: var(--copper); color: white;
+  font-size: 13px; font-weight: 500;
+  padding: 7px 18px; border-radius: var(--radius-pill);
+  text-decoration: none; white-space: nowrap;
+  transition: background 0.15s; flex-shrink: 0;
+}
+.nav-cta:hover { background: var(--copper-dark); }
+.nav-hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer;
+  padding: 6px; margin-left: auto;
+}
+.nav-hamburger span {
+  display: block; width: 22px; height: 2px;
+  background: rgba(255,255,255,0.8); border-radius: 2px;
+}
+.nav-mobile {
+  display: none; position: fixed; top: 56px; left: 0; right: 0; z-index: 190;
+  background: rgba(20,25,36,0.98);
+  backdrop-filter: blur(20px);
+  padding: 16px 20px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  flex-direction: column; gap: 4px;
+}
+.nav-mobile.open { display: flex; }
+.nav-mobile .nav-link { font-size: 15px; padding: 11px 4px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.nav-mobile .nav-cta { margin-top: 10px; text-align: center; padding: 12px; }
+
+/* ── HERO ────────────────────────────────────── */
+.hero {
+  background: var(--slate-750);
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 120px 0 80px;
+  position: relative; overflow: hidden;
+}
+.hero-grid {
+  position: absolute; inset: 0; opacity: 0.045;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(255,255,255,1) 60px, rgba(255,255,255,1) 61px),
+    repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(255,255,255,1) 60px, rgba(255,255,255,1) 61px);
+  pointer-events: none;
+}
+.hero-glow {
+  position: absolute; bottom: -200px; right: -100px;
+  width: 700px; height: 700px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,139,98,0.13) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-glow-2 {
+  position: absolute; top: -150px; left: -100px;
+  width: 500px; height: 500px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(53,68,96,0.6) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-inner {
+  max-width: 1120px; margin: 0 auto; padding: 0 40px;
+  display: grid; grid-template-columns: 1.1fr 0.9fr;
+  gap: 64px; align-items: center; width: 100%;
+  position: relative; z-index: 1;
+}
+.hero-eyebrow {
+  font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.15em;
+  color: var(--copper-light); margin-bottom: 20px;
+  display: flex; align-items: center; gap: 10px;
+}
+.hero-eyebrow::before {
+  content: ''; display: block; width: 28px; height: 1px;
+  background: var(--copper-light);
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(38px, 4.6vw, 64px);
+  font-weight: 600; color: white;
+  letter-spacing: -0.03em; line-height: 1.03;
+  margin-bottom: 22px;
+}
+.hero-title em { font-style: italic; font-weight: 300; color: var(--copper-light); }
+.hero-sub {
+  font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.60);
+  line-height: 1.68; margin-bottom: 38px; letter-spacing: -0.01em;
+  max-width: 500px;
+}
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 44px; }
+.hero-metrics {
+  display: flex; gap: 0;
+  border-top: 1px solid rgba(255,255,255,0.09);
+  padding-top: 32px;
+}
+.hero-metric {
+  flex: 1; padding-right: 24px;
+  border-right: 1px solid rgba(255,255,255,0.09);
+  margin-right: 24px;
+}
+.hero-metric:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+.metric-num {
+  font-family: var(--font-display);
+  font-size: 38px; font-weight: 700; color: var(--copper-light);
+  letter-spacing: -0.04em; line-height: 1;
+}
+.metric-label { font-size: 12px; color: rgba(255,255,255,0.45); margin-top: 5px; line-height: 1.4; }
+
+/* Right side — tech visual */
+.hero-visual { display: flex; flex-direction: column; gap: 14px; position: relative; z-index: 1; }
+.hero-terminal {
+  background: rgba(20,25,36,0.85);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 14px; overflow: hidden;
+  backdrop-filter: blur(12px);
+}
+.terminal-bar {
+  background: rgba(255,255,255,0.05);
+  padding: 10px 16px; display: flex; align-items: center; gap: 6px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.terminal-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+}
+.terminal-dot:nth-child(1) { background: rgba(255,95,87,0.7); }
+.terminal-dot:nth-child(2) { background: rgba(255,189,68,0.7); }
+.terminal-dot:nth-child(3) { background: rgba(40,200,64,0.7); }
+.terminal-title { font-size: 11px; color: rgba(255,255,255,0.35); margin-left: 8px; font-family: var(--font-mono); }
+.terminal-body { padding: 18px 20px; font-family: var(--font-mono); font-size: 12px; line-height: 1.85; }
+.t-comment { color: rgba(170,185,197,0.45); }
+.t-key { color: #e5bc9a; }
+.t-val { color: rgba(255,255,255,0.75); }
+.t-accent { color: #8ab89a; }
+.t-cursor { display: inline-block; width: 7px; height: 13px; background: var(--copper-light); vertical-align: middle; animation: blink 1.1s step-end infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+.hero-cards { display: flex; flex-direction: column; gap: 10px; }
+.hero-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 12px; padding: 16px 18px;
+  display: flex; align-items: center; gap: 14px;
+  transition: background 0.2s;
+}
+.hero-card:hover { background: rgba(255,255,255,0.08); }
+.hero-card-icon {
+  width: 36px; height: 36px; border-radius: 9px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; background: rgba(201,139,98,0.15); color: var(--copper-light);
+}
+.hero-card-title { font-size: 14px; font-weight: 600; color: white; margin-bottom: 2px; }
+.hero-card-text { font-size: 12px; color: rgba(255,255,255,0.48); line-height: 1.4; }
+
+/* ── SOBRE NOSOTROS ─────────────────────────── */
+.about { background: var(--parchment); padding: 104px 0; }
+.about-inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: start;
+}
+.about-text h2 {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 3.2vw, 46px); font-weight: 600;
+  letter-spacing: -0.025em; line-height: 1.1;
+  color: var(--ink); margin-bottom: 20px;
+}
+.about-text h2 em { font-style: italic; font-weight: 300; color: var(--copper); }
+.about-text p {
+  font-size: 16px; color: var(--ink-60); line-height: 1.68;
+  margin-bottom: 16px; font-weight: 300;
+}
+.about-text p strong { color: var(--ink); font-weight: 600; }
+.about-text p:last-of-type { margin-bottom: 32px; }
+.about-right { display: flex; flex-direction: column; gap: 16px; }
+.about-card {
+  background: white; border-radius: 16px;
+  padding: 26px 28px; border: 1px solid var(--ink-10);
+  display: flex; gap: 18px; align-items: flex-start;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.about-card:hover { box-shadow: 0 6px 24px rgba(26,32,48,0.09); transform: translateY(-2px); }
+.about-card-icon {
+  width: 44px; height: 44px; border-radius: 11px; flex-shrink: 0;
+  background: var(--copper-pale); color: var(--copper);
+  display: flex; align-items: center; justify-content: center; font-size: 21px;
+}
+.about-card h4 { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 5px; }
+.about-card p { font-size: 13px; color: var(--ink-60); line-height: 1.58; }
+.about-dark {
+  background: var(--slate-800); border-color: transparent;
+}
+.about-dark .about-card-icon { background: rgba(201,139,98,0.15); color: var(--copper-light); }
+.about-dark h4 { color: white; }
+.about-dark p { color: rgba(255,255,255,0.55); }
+
+/* ── SERVICIOS JURÍDICOS ────────────────────── */
+.services-legal { background: var(--white); padding: 104px 0; }
+.section-head { margin-bottom: 52px; }
+.section-head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 44px); font-weight: 600;
+  letter-spacing: -0.025em; line-height: 1.1; color: var(--ink);
+  max-width: 600px; margin-bottom: 12px;
+}
+.section-head p { font-size: 16px; color: var(--ink-60); line-height: 1.65; max-width: 560px; font-weight: 300; }
+.services-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+}
+.service-card {
+  background: var(--white); border: 1px solid var(--ink-10);
+  border-radius: var(--radius-card); padding: 30px 26px;
+  transition: box-shadow 0.22s, transform 0.22s;
+}
+.service-card:hover { box-shadow: 0 8px 32px rgba(26,32,48,0.09); transform: translateY(-3px); }
+.card-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  background: var(--copper-pale); color: var(--copper);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; margin-bottom: 18px;
+}
+.service-card h3 {
+  font-family: var(--font-display);
+  font-size: 20px; font-weight: 600; color: var(--ink);
+  letter-spacing: -0.01em; line-height: 1.2; margin-bottom: 10px;
+}
+.service-card p { font-size: 14px; color: var(--ink-60); line-height: 1.65; margin-bottom: 18px; }
+.card-link {
+  font-size: 13px; color: var(--copper); font-weight: 600;
+  text-decoration: none; display: inline-flex; align-items: center;
+  gap: 4px; transition: gap 0.15s;
+}
+.card-link:hover { gap: 8px; }
+
+/* ── TECNOLOGÍA LEGAL ───────────────────────── */
+.tech-section { background: var(--slate-800); padding: 104px 0; }
+.tech-inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+}
+.tech-text .section-label { color: var(--copper-light); }
+.tech-text h2 {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 3.2vw, 46px); font-weight: 600;
+  color: white; letter-spacing: -0.025em; line-height: 1.1;
+  margin-bottom: 18px;
+}
+.tech-text h2 em { font-style: italic; font-weight: 300; color: var(--copper-light); }
+.tech-text > p { font-size: 16px; color: rgba(255,255,255,0.58); line-height: 1.68; margin-bottom: 32px; font-weight: 300; }
+.tech-features { display: flex; flex-direction: column; gap: 16px; margin-bottom: 36px; }
+.tech-feature {
+  display: flex; gap: 14px; align-items: flex-start;
+}
+.tech-feature-icon {
+  width: 38px; height: 38px; border-radius: 9px; flex-shrink: 0;
+  background: rgba(201,139,98,0.15); color: var(--copper-light);
+  display: flex; align-items: center; justify-content: center; font-size: 18px;
+}
+.tech-feature h4 { font-size: 15px; font-weight: 600; color: white; margin-bottom: 3px; }
+.tech-feature p { font-size: 13px; color: rgba(255,255,255,0.50); line-height: 1.55; }
+.tech-grid { display: flex; flex-direction: column; gap: 14px; }
+.tech-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 14px; padding: 22px 24px;
+  transition: background 0.2s;
+}
+.tech-card:hover { background: rgba(255,255,255,0.08); }
+.tech-card-head {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 10px;
+}
+.tech-card-icon { font-size: 22px; color: var(--copper-light); }
+.tech-card-title { font-size: 15px; font-weight: 600; color: white; }
+.tech-card p { font-size: 13px; color: rgba(255,255,255,0.50); line-height: 1.58; }
+.tech-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: rgba(201,139,98,0.15); color: var(--copper-light);
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.1em; padding: 5px 12px; border-radius: 980px;
+  border: 1px solid rgba(201,139,98,0.25); margin-bottom: 18px;
+}
+
+/* ── DIFERENCIADORES ────────────────────────── */
+.why { background: var(--parchment); padding: 104px 0; }
+.why-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px; margin-top: 52px;
+}
+.why-card {
+  background: white; border-radius: var(--radius-card);
+  padding: 32px 28px; border: 1px solid var(--ink-10);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.why-card:hover { box-shadow: 0 8px 28px rgba(26,32,48,0.09); transform: translateY(-2px); }
+.why-num {
+  font-family: var(--font-display);
+  font-size: 48px; font-weight: 700; color: var(--copper-pale);
+  letter-spacing: -0.05em; line-height: 1; margin-bottom: 12px;
+}
+.why-card h3 { font-family: var(--font-display); font-size: 22px; font-weight: 600; color: var(--ink); letter-spacing: -0.01em; margin-bottom: 10px; }
+.why-card p { font-size: 14px; color: var(--ink-60); line-height: 1.65; }
+
+.why-highlight {
+  background: var(--slate-900);
+  border-radius: var(--radius-card);
+  padding: 40px 44px; margin-top: 32px;
+  display: flex; align-items: center; gap: 48px;
+}
+.why-highlight-text h3 {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.5vw, 32px); font-weight: 600;
+  color: white; letter-spacing: -0.02em; line-height: 1.15;
+  margin-bottom: 10px;
+}
+.why-highlight-text h3 em { font-style: italic; font-weight: 300; color: var(--copper-light); }
+.why-highlight-text p { font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.65; max-width: 460px; }
+.why-highlight-cta { flex-shrink: 0; }
+
+/* ── CASOS DE USO ───────────────────────────── */
+.cases { background: var(--white); padding: 104px 0; }
+.cases-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 24px; margin-top: 52px;
+}
+.case-card {
+  border-radius: var(--radius-card); padding: 32px 30px;
+  border: 1px solid var(--ink-10);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.case-card:hover { box-shadow: 0 8px 28px rgba(26,32,48,0.09); transform: translateY(-2px); }
+.case-card.dark { background: var(--slate-800); border-color: transparent; }
+.case-tag {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.1em; padding: 4px 10px; border-radius: 980px;
+  margin-bottom: 18px;
+}
+.case-tag.legal { background: var(--copper-pale); color: var(--copper); }
+.case-tag.tech { background: rgba(201,139,98,0.15); color: var(--copper-light); }
+.case-card h3 {
+  font-family: var(--font-display);
+  font-size: 22px; font-weight: 600; color: var(--ink);
+  letter-spacing: -0.015em; margin-bottom: 12px; line-height: 1.2;
+}
+.case-card.dark h3 { color: white; }
+.case-card p { font-size: 14px; color: var(--ink-60); line-height: 1.65; }
+.case-card.dark p { color: rgba(255,255,255,0.53); }
+.case-result {
+  margin-top: 18px; padding-top: 16px;
+  border-top: 1px solid var(--ink-10);
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; font-weight: 600; color: var(--copper);
+}
+.case-card.dark .case-result { border-top-color: rgba(255,255,255,0.10); color: var(--copper-light); }
+.case-result i { font-size: 16px; }
+
+/* ── EQUIPO ─────────────────────────────────── */
+.team { background: var(--parchment); padding: 104px 0; }
+.team-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 22px; margin-top: 52px;
+}
+.team-card {
+  text-align: center; padding: 32px 20px 28px;
+  border: 1px solid var(--ink-10); border-radius: var(--radius-card);
+  background: white;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.team-card:hover { box-shadow: 0 8px 28px rgba(26,32,48,0.09); transform: translateY(-2px); }
+.team-avatar {
+  width: 76px; height: 76px; border-radius: 50%;
+  margin: 0 auto 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 26px; font-weight: 600;
+  background: var(--copper-pale); color: var(--copper);
+}
+.team-card h4 {
+  font-family: var(--font-display);
+  font-size: 18px; font-weight: 600; color: var(--ink);
+  letter-spacing: -0.01em; margin-bottom: 3px;
+}
+.team-role {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.09em; color: var(--copper); margin-bottom: 10px;
+  display: block;
+}
+.team-divider {
+  width: 28px; height: 2px; border-radius: 2px;
+  background: var(--copper-pale); margin: 10px auto 12px;
+}
+.team-bio { font-size: 13px; color: var(--ink-60); line-height: 1.58; }
+
+/* ── PROCESO ────────────────────────────────── */
+.process { background: var(--white); padding: 104px 0; }
+.process-steps {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 0; margin-top: 52px; position: relative;
+}
+.process-steps::before {
+  content: ''; position: absolute; top: 27px; left: 13%; right: 13%;
+  height: 1px; background: var(--ink-10);
+}
+.step { text-align: center; padding: 0 12px; position: relative; }
+.step-num {
+  width: 54px; height: 54px; border-radius: 50%;
+  background: var(--copper-pale); color: var(--copper);
+  font-family: var(--font-display); font-size: 22px; font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 20px; position: relative; z-index: 1;
+  border: 2px solid rgba(201,139,98,0.3);
+}
+.step h4 { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+.step p { font-size: 13px; color: var(--ink-60); line-height: 1.58; }
+
+/* ── CONTACTO ───────────────────────────────── */
+.contact { background: var(--parchment); padding: 104px 0; }
+.contact-inner {
+  display: grid; grid-template-columns: 1fr 1.15fr;
+  gap: 80px; align-items: start;
+}
+.contact-info .section-label { margin-bottom: 14px; }
+.contact-info h2 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 44px); font-weight: 600;
+  letter-spacing: -0.025em; line-height: 1.1;
+  color: var(--ink); margin-bottom: 14px;
+}
+.contact-info > p {
+  font-size: 16px; color: var(--ink-60); line-height: 1.65;
+  margin-bottom: 36px; font-weight: 300;
+}
+.contact-detail { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 18px; }
+.contact-icon {
+  width: 40px; height: 40px; background: var(--copper-pale);
+  border-radius: 10px; display: flex; align-items: center;
+  justify-content: center; color: var(--copper); font-size: 18px; flex-shrink: 0;
+}
+.contact-detail strong { font-size: 13px; font-weight: 600; color: var(--ink); display: block; margin-bottom: 2px; }
+.contact-detail span { font-size: 14px; color: var(--ink-60); }
+.contact-privacy {
+  margin-top: 28px; padding: 16px 18px;
+  background: white; border-radius: 12px; border: 1px solid var(--ink-10);
+  display: flex; gap: 12px; align-items: flex-start;
+}
+.contact-privacy i { font-size: 17px; color: var(--copper); flex-shrink: 0; margin-top: 1px; }
+.contact-privacy p { font-size: 13px; color: var(--ink-60); line-height: 1.55; }
+.contact-form {
+  background: white; border-radius: 20px;
+  padding: 36px; border: 1px solid var(--ink-10);
+}
+.form-title {
+  font-family: var(--font-display);
+  font-size: 24px; font-weight: 600; color: var(--ink);
+  margin-bottom: 24px; letter-spacing: -0.02em;
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-group { margin-bottom: 16px; }
+.form-label { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 7px; display: block; }
+.form-input {
+  width: 100%; padding: 12px 16px;
+  border: 1px solid rgba(26,32,48,0.14);
+  border-radius: 10px; font-family: var(--font-body);
+  font-size: 15px; color: var(--ink); background: white;
+  outline: none; transition: border-color 0.15s, box-shadow 0.15s;
+  appearance: none;
+}
+.form-input::placeholder { color: var(--ink-40); }
+.form-input:focus { border-color: var(--copper); box-shadow: 0 0 0 3px rgba(201,139,98,0.14); }
+select.form-input { cursor: pointer; }
+textarea.form-input { resize: vertical; min-height: 100px; }
+.form-submit {
+  width: 100%; padding: 14px;
+  background: var(--copper); color: white;
+  font-family: var(--font-body); font-size: 17px;
+  font-weight: 400; border: none; border-radius: var(--radius-pill);
+  cursor: pointer; transition: background 0.15s; margin-top: 4px;
+}
+.form-submit:hover { background: var(--copper-dark); }
+.form-submit:active { transform: scale(0.97); }
+.form-note { font-size: 12px; color: var(--ink-40); text-align: center; margin-top: 12px; line-height: 1.55; }
+.form-success { display: none; text-align: center; padding: 32px 20px; }
+.form-success-icon {
+  width: 60px; height: 60px; border-radius: 50%;
+  background: var(--copper-pale); color: var(--copper);
+  font-size: 28px; margin: 0 auto 16px;
+  display: flex; align-items: center; justify-content: center;
+}
+.form-success h3 {
+  font-family: var(--font-display); font-size: 22px; font-weight: 600;
+  color: var(--ink); margin-bottom: 8px; letter-spacing: -0.01em;
+}
+.form-success p { font-size: 15px; color: var(--ink-60); line-height: 1.6; }
+
+/* ── FOOTER ─────────────────────────────────── */
+.footer { background: var(--slate-950); padding: 64px 0 32px; }
+.footer-top {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px; margin-bottom: 48px;
+}
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 20px; font-weight: 600;
+  color: #c9a84c; letter-spacing: -0.01em;
+  display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+}
+.footer-logo img { height: 30px; }
+.footer-brand > p { font-size: 13px; color: rgba(255,255,255,0.40); line-height: 1.7; max-width: 260px; }
+.footer-tagline {
+  margin-top: 16px; display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; color: rgba(255,255,255,0.28); font-weight: 500; letter-spacing: 0.04em;
+}
+.footer-tagline::before { content: ''; display: block; width: 16px; height: 1px; background: rgba(255,255,255,0.2); }
+.footer-col h4 {
+  font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.88);
+  text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;
+}
+.footer-col a, .footer-col span {
+  display: block; font-size: 13px;
+  color: rgba(255,255,255,0.42); text-decoration: none;
+  margin-bottom: 10px; line-height: 1.4; transition: color 0.15s; cursor: pointer;
+}
+.footer-col a:hover { color: rgba(255,255,255,0.82); }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding-top: 24px; display: flex;
+  justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 12px;
+}
+.footer-legal { font-size: 12px; color: rgba(255,255,255,0.26); }
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { font-size: 12px; color: rgba(255,255,255,0.28); text-decoration: none; transition: color 0.15s; }
+.footer-links a:hover { color: rgba(255,255,255,0.6); }
+
+/* ── RESPONSIVE ─────────────────────────────── */
+@media (max-width: 960px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+  .hero-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .hero-terminal { grid-column: 1 / -1; }
+  .about-inner { grid-template-columns: 1fr; gap: 48px; }
+  .tech-inner { grid-template-columns: 1fr; gap: 48px; }
+  .why-grid { grid-template-columns: 1fr 1fr; }
+  .cases-grid { grid-template-columns: 1fr; }
+  .team-grid { grid-template-columns: 1fr 1fr; gap: 18px; }
+  .process-steps { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .process-steps::before { display: none; }
+  .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .nav-links, .nav-cta { display: none; }
+  .nav-hamburger { display: flex; }
+  .services-grid { grid-template-columns: 1fr 1fr; }
+  .why-highlight { flex-direction: column; gap: 24px; text-align: center; }
+}
+@media (max-width: 640px) {
+  .container { padding: 0 20px; }
+  .nav-inner { padding: 0 20px; }
+  .hero-inner { padding: 0 20px; }
+  .hero-visual { grid-template-columns: 1fr; }
+  .services-grid { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: 1fr; }
+  .team-grid { grid-template-columns: 1fr 1fr; }
+  .process-steps { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr; }
+  .hero, .about, .services-legal, .tech-section, .why, .cases, .team, .process, .contact { padding: 80px 0; }
+  .hero { padding-top: 96px; }
+}
+@media (max-width: 420px) {
+  .team-grid { grid-template-columns: 1fr; }
+}
+
+/* ── REVEAL ANIMATION ───────────────────────── */
+.reveal {
+  opacity: 0; transform: translateY(18px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ────────────────────────────────────── -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#inicio">
+      <img src="assets/logo-legaltec.png" alt="F&P Legaltec">
+      F&amp;P Legaltec
+    </a>
+    <div class="nav-links">
+      <a class="nav-link" href="#nosotros">El despacho</a>
+      <a class="nav-link" href="#servicios-juridicos">Servicios jurídicos</a>
+      <a class="nav-link" href="#tecnologia">Legaltech</a>
+      <a class="nav-link" href="#equipo">Equipo</a>
+      <a class="nav-link" href="#contacto">Contacto</a>
+    </div>
+    <a class="nav-cta" href="#contacto">Consulta gratuita</a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav-mobile" id="navMobile">
+  <a class="nav-link" href="#nosotros">El despacho</a>
+  <a class="nav-link" href="#servicios-juridicos">Servicios jurídicos</a>
+  <a class="nav-link" href="#tecnologia">Legaltech</a>
+  <a class="nav-link" href="#equipo">Equipo</a>
+  <a class="nav-link" href="#contacto">Contacto</a>
+  <a class="nav-cta" href="#contacto">Consulta gratuita</a>
+</div>
+
+<!-- ── HERO ──────────────────────────────────── -->
+<section class="hero" id="inicio">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Cooperativa de asesores jurídicos y tecnológicos</div>
+      <h1 class="hero-title">
+        Treinta años de experiencia.<br>
+        <em>La vanguardia del derecho.</em>
+      </h1>
+      <p class="hero-sub">
+        F&amp;P Legaltec une la solidez de más de tres décadas de ejercicio jurídico con las herramientas más avanzadas de la tecnología legal. Derecho penal, civil, mercantil, laboral, extranjería y protección de datos — resueltos con rigor y con inteligencia.
+      </p>
+      <div class="hero-btns">
+        <a class="btn btn-primary" href="#contacto">Solicitar consulta gratuita</a>
+        <a class="btn btn-ghost-white" href="#nosotros">Conózcanos</a>
+      </div>
+      <div class="hero-metrics">
+        <div class="hero-metric">
+          <div class="metric-num">+30</div>
+          <div class="metric-label">Años de experiencia jurídica</div>
+        </div>
+        <div class="hero-metric">
+          <div class="metric-num">+2.500</div>
+          <div class="metric-label">Casos gestionados</div>
+        </div>
+        <div class="hero-metric">
+          <div class="metric-num">10</div>
+          <div class="metric-label">Áreas de práctica</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-terminal">
+        <div class="terminal-bar">
+          <div class="terminal-dot"></div>
+          <div class="terminal-dot"></div>
+          <div class="terminal-dot"></div>
+          <div class="terminal-title">fp-legaltec — análisis jurídico.js</div>
+        </div>
+        <div class="terminal-body">
+          <div class="t-comment">// Análisis automatizado de caso</div>
+          <div><span class="t-key">const</span> <span class="t-val">caso</span> = {</div>
+          <div>&nbsp;&nbsp;<span class="t-key">area</span>: <span class="t-accent">"Derecho Laboral"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="t-key">riesgo</span>: <span class="t-accent">"bajo"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="t-key">jurisprudencia</span>: <span class="t-val">true</span>,</div>
+          <div>&nbsp;&nbsp;<span class="t-key">ia_asistida</span>: <span class="t-val">true</span></div>
+          <div>};</div>
+          <div>&nbsp;</div>
+          <div><span class="t-comment">// Estrategia recomendada ✓</span></div>
+          <div><span class="t-key">return</span> <span class="t-accent">"Defensa exitosa"</span> <span class="t-cursor"></span></div>
+        </div>
+      </div>
+      <div class="hero-cards">
+        <div class="hero-card">
+          <div class="hero-card-icon"><i class="ph ph-robot"></i></div>
+          <div>
+            <div class="hero-card-title">IA aplicada al derecho</div>
+            <div class="hero-card-text">Análisis predictivo de casos y jurisprudencia asistido por inteligencia artificial.</div>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-icon"><i class="ph ph-shield-check"></i></div>
+          <div>
+            <div class="hero-card-title">Protección de datos</div>
+            <div class="hero-card-text">Cumplimiento RGPD y auditorías de privacidad para empresas y profesionales.</div>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-icon"><i class="ph ph-scales"></i></div>
+          <div>
+            <div class="hero-card-title">Derecho en todas sus ramas</div>
+            <div class="hero-card-text">Penal, civil, mercantil, laboral, extranjería, propiedad intelectual y más.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SOBRE NOSOTROS ────────────────────────── -->
+<section class="about" id="nosotros">
+  <div class="container">
+    <div class="about-inner">
+      <div class="about-text">
+        <span class="section-label">El despacho</span>
+        <h2>Tres décadas de rigor jurídico, <em>reinventadas</em></h2>
+        <p>F&amp;P Legaltec es una cooperativa de asesores jurídicos y técnicos especializados en la aplicación de las nuevas tecnologías al derecho. Nacimos de la convicción de que la experiencia tradicional y la innovación digital no son opuestos: son la combinación perfecta.</p>
+        <p>Nuestro equipo acumula <strong>más de 30 años de ejercicio activo</strong> en los principales ramos del derecho español. A esa base sólida sumamos herramientas de inteligencia artificial, automatización de procesos legales y asesoramiento tecnológico para empresas y particulares que operan en el entorno digital.</p>
+        <p>Un solo despacho. Toda la ley. Toda la tecnología.</p>
+        <a class="btn btn-primary" href="#contacto">Contactar con el despacho</a>
+      </div>
+      <div class="about-right">
+        <div class="about-card reveal">
+          <div class="about-card-icon"><i class="ph ph-gavel"></i></div>
+          <div>
+            <h4>Experiencia jurídica consolidada</h4>
+            <p>Más de tres décadas resolviendo casos complejos ante juzgados y tribunales de toda España. Conocemos el sistema desde dentro.</p>
+          </div>
+        </div>
+        <div class="about-card reveal">
+          <div class="about-card-icon"><i class="ph ph-cpu"></i></div>
+          <div>
+            <h4>Tecnología legal de vanguardia</h4>
+            <p>Integramos IA, legaltech y automatización en cada proceso. Más velocidad, más precisión, costes optimizados para el cliente.</p>
+          </div>
+        </div>
+        <div class="about-card reveal">
+          <div class="about-card-icon"><i class="ph ph-users-three"></i></div>
+          <div>
+            <h4>Equipo multidisciplinar</h4>
+            <p>Juristas, asesores tecnológicos y especialistas en protección de datos trabajando de forma coordinada en cada asunto.</p>
+          </div>
+        </div>
+        <div class="about-card about-dark reveal">
+          <div class="about-card-icon"><i class="ph ph-handshake"></i></div>
+          <div>
+            <h4>Compromiso con cada cliente</h4>
+            <p>Sin letra pequeña. Primera consulta siempre gratuita. Honorarios claros. Actualizaciones constantes del estado de su caso.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICIOS JURÍDICOS ───────────────────── -->
+<section class="services-legal" id="servicios-juridicos">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-label">Servicios jurídicos</span>
+      <h2>Asesoramiento legal experto en todas las ramas del derecho</h2>
+      <p>Cubrimos íntegramente las necesidades jurídicas de personas físicas, autónomos y empresas, con un enfoque práctico y orientado a resultados.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card reveal">
+        <div class="card-icon"><i class="ph ph-briefcase"></i></div>
+        <h3>Asesoría legal general</h3>
+        <p>Orientación jurídica integral para toda situación legal: contratos, reclamaciones, consultas puntuales y acompañamiento continuo con visión estratégica.</p>
+        <a class="card-link" href="#contacto">Consultar <i class="ph ph-arrow-right" style="font-size:12px"></i></a>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="card-icon"><i class="ph ph-hard-hat"></i></div>
+        <h3>Derecho laboral</h3>
+        <p>Defensa del trabajador y asesoramiento a empresas: despidos, EREs, acoso laboral, accidentes de trabajo, reclamaciones salariales y negociación colectiva.</p>
+        <a class="card-link" href="#contacto">Consultar <i class="ph ph-arrow-right" style="font-size:12px"></i></a>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="card-icon"><i class="ph ph-scales"></i></div>
+        <h3>Derecho civil</h3>
+        <p>Divorcios, herencias, arrendamientos, compraventas inmobiliarias, reclamaciones de cantidad y litigios entre particulares ante los tribunales civiles.</p>
+        <a class="card-link" href="#contacto">Consultar <i class="ph ph-arrow-right" style="font-size:12px"></i></a>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="card-icon"><i class="ph ph-storefront"></i></div>
+        <h3>Derecho mercantil</h3>
+        <p>Constitución de sociedades, contratos mercantiles, fusiones, reclamaciones entre empresas y procesos concursales. Asesoramiento continuo para pymes y startups.</p>
+        <a class="card-link" href="#contacto">Consultar <i class="ph ph-arrow-right" style="font-size:12px"></i></a>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="card-icon"><i class="ph ph-gavel"></i></div>
+        <h3>Derecho penal</h3>
+        <p>Defensa integral en procedimientos penales: instrucción, juicio oral, recursos. Especialización en delitos informáticos, económicos y corporativos.</p>
+        <a class="card-link" href="#contacto">Consultar <i class="ph ph-arrow-right" style="font-size:12px"></i></a>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="card-icon"><i class="ph ph-globe"></i></div>
+        <h3>Derecho de extranjería</h3>
+        <p>NIE, residencias, visados de trabajo y estudio, reagrupación familiar, recursos contra denegaciones y tramitación de la nacionalidad española.</p>
+        <a class="card-link" href="#contacto">Consultar <i class="ph ph-arrow-right" style="font-size:12px"></i></a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── TECNOLOGÍA LEGAL ──────────────────────── -->
+<section class="tech-section" id="tecnologia">
+  <div class="container">
+    <div class="tech-inner">
+      <div class="tech-text">
+        <div class="tech-badge"><i class="ph ph-cpu" style="font-size:12px"></i> Legaltech</div>
+        <h2>La tecnología al servicio <em>de su defensa</em></h2>
+        <p>Somos asesores técnicos especializados en la digitalización del derecho. Acompañamos a empresas y profesionales en la transformación de sus procesos jurídicos y en el cumplimiento de la normativa tecnológica vigente.</p>
+        <div class="tech-features">
+          <div class="tech-feature">
+            <div class="tech-feature-icon"><i class="ph ph-robot"></i></div>
+            <div>
+              <h4>IA aplicada al derecho</h4>
+              <p>Análisis predictivo de jurisprudencia, redacción asistida de documentos legales y automatización de due diligence.</p>
+            </div>
+          </div>
+          <div class="tech-feature">
+            <div class="tech-feature-icon"><i class="ph ph-shield-check"></i></div>
+            <div>
+              <h4>Protección de datos y privacidad (RGPD)</h4>
+              <p>Auditorías de cumplimiento, registro de actividades, delegados de protección de datos y respuesta ante brechas de seguridad.</p>
+            </div>
+          </div>
+          <div class="tech-feature">
+            <div class="tech-feature-icon"><i class="ph ph-lightning"></i></div>
+            <div>
+              <h4>Legaltech y automatización de procesos</h4>
+              <p>Implantamos sistemas que reducen tiempos y errores en la gestión documental, contratos y expedientes legales.</p>
+            </div>
+          </div>
+          <div class="tech-feature">
+            <div class="tech-feature-icon"><i class="ph ph-buildings"></i></div>
+            <div>
+              <h4>Transformación digital de empresas</h4>
+              <p>Asesoramiento jurídico-tecnológico en proyectos de digitalización: contratos cloud, SLAs, cumplimiento normativo digital.</p>
+            </div>
+          </div>
+        </div>
+        <a class="btn btn-primary" href="#contacto">Solicitar asesoramiento tech</a>
+      </div>
+      <div class="tech-grid">
+        <div class="tech-card reveal">
+          <div class="tech-card-head">
+            <div class="tech-card-icon"><i class="ph ph-certificate"></i></div>
+            <div class="tech-card-title">Propiedad intelectual digital</div>
+          </div>
+          <p>Registro y defensa de marcas, software, contenidos digitales y activos tecnológicos. Licencias y contratos de software.</p>
+        </div>
+        <div class="tech-card reveal">
+          <div class="tech-card-head">
+            <div class="tech-card-icon"><i class="ph ph-bug"></i></div>
+            <div class="tech-card-title">Ciberseguridad legal</div>
+          </div>
+          <p>Asesoramiento ante incidentes de ciberseguridad, delitos informáticos y responsabilidad civil derivada de vulneraciones de datos.</p>
+        </div>
+        <div class="tech-card reveal">
+          <div class="tech-card-head">
+            <div class="tech-card-icon"><i class="ph ph-file-code"></i></div>
+            <div class="tech-card-title">Contratos tecnológicos</div>
+          </div>
+          <p>Redacción y revisión de contratos de desarrollo de software, acuerdos de servicio (SaaS), términos de uso y políticas de privacidad.</p>
+        </div>
+        <div class="tech-card reveal">
+          <div class="tech-card-head">
+            <div class="tech-card-icon"><i class="ph ph-rocket-launch"></i></div>
+            <div class="tech-card-title">Startups y empresas tech</div>
+          </div>
+          <p>Constitución, financiación, pactos de socios, propiedad intelectual y cumplimiento normativo para empresas tecnológicas en crecimiento.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── POR QUÉ ELEGIRNOS ─────────────────────── -->
+<section class="why" id="por-que">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-label">Por qué elegirnos</span>
+      <h2>Lo que nos diferencia</h2>
+      <p>No somos un despacho al uso. Somos la intersección entre la tradición jurídica más sólida y la innovación tecnológica más exigente.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-num">01</div>
+        <h3>Experiencia sin compromiso</h3>
+        <p>Más de 30 años de ejercicio activo garantizan que su caso está en manos de profesionales que conocen cada recodo del sistema judicial español.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-num">02</div>
+        <h3>Tecnología como ventaja</h3>
+        <p>La inteligencia artificial y las herramientas legaltech nos permiten analizar más rápido, documentar mejor y anticipar riesgos que otros despachos no detectan.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-num">03</div>
+        <h3>Un despacho, todo el derecho</h3>
+        <p>No necesita coordinar varios abogados de distintos ámbitos. Nosotros cubrimos todas las ramas: un único interlocutor para toda su situación legal.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-num">04</div>
+        <h3>Transparencia total</h3>
+        <p>Honorarios claros desde el primer día. Le informamos puntualmente de cada avance. Sin sorpresas, sin letra pequeña, sin gastos ocultos.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-num">05</div>
+        <h3>Cooperativa comprometida</h3>
+        <p>Como cooperativa, cada profesional es propietario del proyecto. Eso se traduce en una implicación personal muy superior a la de un empleado de un gran bufete.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-num">06</div>
+        <h3>Primera consulta gratuita</h3>
+        <p>Sin compromiso. Cuéntenos su situación y le daremos una valoración honesta. Si podemos ayudarle, le explicaremos exactamente cómo y cuánto.</p>
+      </div>
+    </div>
+    <div class="why-highlight">
+      <div class="why-highlight-text">
+        <h3>¿Empresa que afronta un reto legal <em>y tecnológico</em>?</h3>
+        <p>Somos el único equipo que puede asesorarle simultáneamente en los aspectos jurídicos y en los técnicos de su proyecto de transformación digital, protección de datos o disputa ante tribunales.</p>
+      </div>
+      <div class="why-highlight-cta">
+        <a class="btn btn-primary" href="#contacto">Hablemos de su caso</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CASOS DE USO ──────────────────────────── -->
+<section class="cases" id="casos">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-label">Casos de uso</span>
+      <h2>Situaciones reales que resolvemos</h2>
+      <p>Ejemplos de cómo la combinación de experiencia jurídica y tecnología produce resultados superiores para nuestros clientes.</p>
+    </div>
+    <div class="cases-grid">
+      <div class="case-card reveal">
+        <div class="case-tag legal"><i class="ph ph-hard-hat" style="font-size:11px"></i> Derecho laboral</div>
+        <h3>Despido improcedente en empresa tecnológica</h3>
+        <p>Un desarrollador de software fue despedido alegando causas objetivas. Mediante análisis documental automatizado detectamos incoherencias en la documentación aportada por la empresa, lo que permitió negociar una indemnización un 40% superior a la mínima legal.</p>
+        <div class="case-result"><i class="ph ph-check-circle"></i> Acuerdo extrajudicial favorable en 6 semanas</div>
+      </div>
+      <div class="case-card dark reveal">
+        <div class="case-tag tech"><i class="ph ph-shield-check" style="font-size:11px"></i> Protección de datos</div>
+        <h3>Brecha de seguridad en e-commerce: crisis gestionada</h3>
+        <p>Una tienda online sufrió un acceso no autorizado a la base de datos de clientes. Coordinamos la respuesta legal ante la AEPD, gestionamos las notificaciones obligatorias y minimizamos la sanción mediante una actuación rápida y documentada.</p>
+        <div class="case-result"><i class="ph ph-check-circle"></i> Sanción reducida en un 75% por actuación diligente</div>
+      </div>
+      <div class="case-card dark reveal">
+        <div class="case-tag tech"><i class="ph ph-rocket-launch" style="font-size:11px"></i> Startups</div>
+        <h3>Constitución y protección legal de startup SaaS</h3>
+        <p>Acompañamos a tres socios fundadores en la creación de su empresa tecnológica: pacto de socios, registro de la marca y nombre de dominio, contratos con primeros clientes, términos de uso y política de privacidad conformes con el RGPD.</p>
+        <div class="case-result"><i class="ph ph-check-circle"></i> Empresa operativa y protegida en 3 semanas</div>
+      </div>
+      <div class="case-card reveal">
+        <div class="case-tag legal"><i class="ph ph-scales" style="font-size:11px"></i> Derecho civil</div>
+        <h3>Herencia compleja con activos digitales y cuentas en el extranjero</h3>
+        <p>La liquidación de una herencia con criptodivisas, cuentas bancarias en tres países y derechos de autor sobre software requirió coordinar la normativa española, europea y los convenios internacionales vigentes. Resolución íntegra en primera instancia.</p>
+        <div class="case-result"><i class="ph ph-check-circle"></i> Herencia adjudicada sin litigio en 4 meses</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EQUIPO ─────────────────────────────────── -->
+<section class="team" id="equipo">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-label">El equipo</span>
+      <h2>Profesionales que unen ley y tecnología</h2>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <div class="team-avatar">FR</div>
+        <h4>Fernando Ruiz</h4>
+        <div class="team-divider"></div>
+        <span class="team-role">Socio fundador · Abogado</span>
+        <p class="team-bio">Especialista en derecho laboral y mercantil. Más de 18 años ante los tribunales y pionero en la incorporación de herramientas de IA al análisis jurídico del despacho.</p>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-avatar">PM</div>
+        <h4>Patricia Molina</h4>
+        <div class="team-divider"></div>
+        <span class="team-role">Socia · Abogada</span>
+        <p class="team-bio">Experta en derecho civil y extranjería. Reconocida por su enfoque estratégico y su capacidad de resolución extrajudicial. Referente en protección de datos.</p>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-avatar">JV</div>
+        <h4>Javier Vega</h4>
+        <div class="team-divider"></div>
+        <span class="team-role">Asesor tecnológico</span>
+        <p class="team-bio">Ingeniero en sistemas y asesor jurídico-tecnológico. Especializado en ciberseguridad legal, contratos de software y transformación digital de empresas.</p>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-avatar">CS</div>
+        <h4>Carmen Soto</h4>
+        <div class="team-divider"></div>
+        <span class="team-role">Abogada penalista</span>
+        <p class="team-bio">Más de 12 años en derecho penal, con especialización en delitos informáticos y económicos. Amplia experiencia en procedimientos complejos de instancia múltiple.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROCESO ───────────────────────────────── -->
+<section class="process" id="proceso">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-label">Cómo trabajamos</span>
+      <h2>Un proceso claro, de principio a fin</h2>
+    </div>
+    <div class="process-steps">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <h4>Consulta gratuita</h4>
+        <p>Contacte sin compromiso. Escuchamos su situación, valoramos el caso y le explicamos las opciones disponibles.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">2</div>
+        <h4>Análisis inteligente</h4>
+        <p>Combinamos la experiencia de nuestros juristas con herramientas de IA para identificar los argumentos más sólidos y anticipar riesgos.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">3</div>
+        <h4>Estrategia y acción</h4>
+        <p>Diseñamos una estrategia legal a medida y actuamos con diligencia: redactamos, presentamos y defendemos en todas las instancias.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">4</div>
+        <h4>Resolución y seguimiento</h4>
+        <p>Le informamos en tiempo real de cada avance. Trabajamos hasta alcanzar el mejor resultado posible y más allá si lo necesita.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACTO ──────────────────────────────── -->
+<section class="contact" id="contacto">
+  <div class="container">
+    <div class="contact-inner">
+      <div class="contact-info">
+        <span class="section-label">Contacto</span>
+        <h2>Cuéntenos su caso. Le damos una respuesta honesta.</h2>
+        <p>Primera consulta siempre gratuita y sin compromiso. Le respondemos en menos de 24 horas.</p>
+        <div class="contact-detail">
+          <div class="contact-icon"><i class="ph ph-phone"></i></div>
+          <div><strong>Teléfono</strong><span>+34 910 234 567</span></div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon"><i class="ph ph-envelope"></i></div>
+          <div><strong>Email</strong><span>info@fplegaltec.es</span></div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon"><i class="ph ph-map-pin"></i></div>
+          <div><strong>Dirección</strong><span>Calle Mayor, 42 – 2.º D, 28013 Madrid</span></div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon"><i class="ph ph-clock"></i></div>
+          <div><strong>Horario</strong><span>Lunes a viernes, 9:00 – 19:00</span></div>
+        </div>
+        <div class="contact-privacy">
+          <i class="ph ph-lock-simple"></i>
+          <p>Sus datos son tratados con total confidencialidad conforme al RGPD. No se comparten con terceros.</p>
+        </div>
+      </div>
+      <div class="contact-form">
+        <div class="form-title">Solicitar consulta gratuita</div>
+        <div id="formContent">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="nombre">Nombre</label>
+              <input class="form-input" id="nombre" type="text" placeholder="Su nombre" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="email">Correo electrónico</label>
+              <input class="form-input" id="email" type="email" placeholder="correo@ejemplo.com" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="telefono">Teléfono</label>
+            <input class="form-input" id="telefono" type="tel" placeholder="+34 612 345 678">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="area">Área de consulta</label>
+            <select class="form-input" id="area" required>
+              <option value="">Seleccione un área</option>
+              <optgroup label="Servicios jurídicos">
+                <option value="general">Asesoría legal general</option>
+                <option value="laboral">Derecho laboral</option>
+                <option value="civil">Derecho civil</option>
+                <option value="mercantil">Derecho mercantil</option>
+                <option value="penal">Derecho penal</option>
+                <option value="extranjeria">Derecho de extranjería</option>
+              </optgroup>
+              <optgroup label="Asesoramiento tecnológico">
+                <option value="rgpd">Protección de datos / RGPD</option>
+                <option value="ciberseguridad">Ciberseguridad legal</option>
+                <option value="contratos-tech">Contratos tecnológicos</option>
+                <option value="startup">Startups y empresas tech</option>
+                <option value="legaltech">Legaltech y automatización</option>
+              </optgroup>
+              <option value="otro">Otro / No sé aún</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="mensaje">Mensaje</label>
+            <textarea class="form-input" id="mensaje" placeholder="Cuéntenos brevemente su situación o en qué podemos ayudarle…"></textarea>
+          </div>
+          <button class="form-submit" id="formSubmit" type="button">Enviar consulta</button>
+          <p class="form-note">Al enviar acepta nuestra política de privacidad. Primera consulta siempre gratuita.</p>
+        </div>
+        <div class="form-success" id="formSuccess">
+          <div class="form-success-icon"><i class="ph ph-check-circle"></i></div>
+          <h3>¡Consulta recibida!</h3>
+          <p>Nos pondremos en contacto en menos de 24 horas. Gracias por confiar en F&amp;P Legaltec.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="assets/logo-legaltec.png" alt="F&P Legaltec">
+          F&amp;P Legaltec
+        </div>
+        <p>Cooperativa de asesores jurídicos y tecnológicos. Treinta años de experiencia al servicio de particulares y empresas, potenciados por la tecnología legal más avanzada.</p>
+        <div class="footer-tagline">Madrid, España · Derecho y Tecnología</div>
+      </div>
+      <div class="footer-col">
+        <h4>Servicios jurídicos</h4>
+        <a href="#servicios-juridicos">Asesoría legal general</a>
+        <a href="#servicios-juridicos">Derecho laboral</a>
+        <a href="#servicios-juridicos">Derecho civil</a>
+        <a href="#servicios-juridicos">Derecho mercantil</a>
+        <a href="#servicios-juridicos">Derecho penal</a>
+        <a href="#servicios-juridicos">Extranjería</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legaltech</h4>
+        <a href="#tecnologia">IA aplicada al derecho</a>
+        <a href="#tecnologia">Protección de datos</a>
+        <a href="#tecnologia">Ciberseguridad legal</a>
+        <a href="#tecnologia">Contratos tecnológicos</a>
+        <a href="#tecnologia">Startups tech</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <span>+34 910 234 567</span>
+        <span>info@fplegaltec.es</span>
+        <span>Calle Mayor, 42 – Madrid</span>
+        <a href="#contacto">Consulta gratuita</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">© 2025 F&amp;P Legaltec — Todos los derechos reservados.</div>
+      <div class="footer-links">
+        <a href="#">Aviso legal</a>
+        <a href="#">Privacidad</a>
+        <a href="#">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── SMOOTH SCROLL ──────────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+  a.addEventListener('click', function(e) {
+    var id = a.getAttribute('href');
+    if (id === '#') return;
+    var el = document.querySelector(id);
+    if (el) {
+      e.preventDefault();
+      var top = el.getBoundingClientRect().top + window.pageYOffset - 64;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+      navMobile.classList.remove('open');
+    }
+  });
+});
+
+// ── NAV ON SCROLL ──────────────────────────────
+var nav = document.getElementById('nav');
+window.addEventListener('scroll', function() {
+  if (window.scrollY > 16) {
+    nav.style.background = 'rgba(20,25,36,0.97)';
+    nav.style.borderBottomColor = 'rgba(255,255,255,0.10)';
+  } else {
+    nav.style.background = 'rgba(20,25,36,0.94)';
+    nav.style.borderBottomColor = 'rgba(255,255,255,0.06)';
+  }
+});
+
+// ── HAMBURGER ─────────────────────────────────
+var hamburger = document.getElementById('hamburger');
+var navMobile = document.getElementById('navMobile');
+hamburger.addEventListener('click', function() {
+  navMobile.classList.toggle('open');
+});
+
+// ── FORM SUBMIT ───────────────────────────────
+document.getElementById('formSubmit').addEventListener('click', function() {
+  var invalid = false;
+  ['nombre','email','area'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el.value.trim()) {
+      invalid = true;
+      el.style.borderColor = '#c9504a';
+      el.style.boxShadow = '0 0 0 3px rgba(201,80,74,0.12)';
+      el.addEventListener('input', function() {
+        el.style.borderColor = '';
+        el.style.boxShadow = '';
+      }, { once: true });
+    }
+  });
+  if (invalid) return;
+  document.getElementById('formContent').style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+});
+
+// ── REVEAL ON SCROLL ───────────────────────────
+if ('IntersectionObserver' in window) {
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.10 });
+  document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+}
+</script>
+</body>
+</html>
