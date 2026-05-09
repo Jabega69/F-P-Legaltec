@@ -1,0 +1,12 @@
+11{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:api.anthropic.com)",
+      "PowerShell(Get-ChildItem -Recurse \"C:\\\\Users\\\\migue\\\\.claude\\\\projects\\\\C--Users-migue-Desktop-P-gina-web\\\\design_extract\" | ForEach-Object { $_.FullName })",
+      "PowerShell($url = \"https://github.com/git-for-windows/git/releases/download/v2.45.2.windows.1/Git-2.45.2-64-bit.exe\"; $output = \"$env:TEMP\\\\git-installer.exe\"; Invoke-WebRequest -Uri $url -OutFile $output; Write-Host \"Descarga completada: $output\")",
+      "PowerShell(cmd /c \"dir /s /a /b \"\"C:\\\\Users\\\\migue\\\\Desktop\\\\Página_web\"\"\")",
+      "PowerShell(cmd /c \"tar -xzf \"\"C:\\\\Users\\\\migue\\\\Desktop\\\\design.tar.gz\"\" -C \"\"C:\\\\Users\\\\migue\\\\Desktop\\\\design_extracted\"\" 2>&1\")",
+      "PowerShell(cmd /c \"dir /s /b \"\"C:\\\\Users\\\\migue\\\\Desktop\\\\design_extracted\"\"\")"
+    ]
+  }
+}
