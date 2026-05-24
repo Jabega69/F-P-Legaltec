@@ -1306,7 +1306,7 @@ textarea.form-input { resize: vertical; min-height: 100px; }
           F&amp;P Legaltec
         </div>
         <p>Cooperativa de asesores jurídicos y tecnológicos. Treinta años de experiencia al servicio de particulares y empresas, potenciados por la tecnología legal más avanzada.</p>
-        <div class="footer-tagline">Madrid, España · Derecho y Tecnología</div>
+        <div class="footer-tagline">Lorca, Murcia · Derecho y Tecnología</div>
       </div>
       <div class="footer-col">
         <h4>Servicios jurídicos</h4>
@@ -1327,18 +1327,18 @@ textarea.form-input { resize: vertical; min-height: 100px; }
       </div>
       <div class="footer-col">
         <h4>Contacto</h4>
-        <span>+34 910 234 567</span>
-        <span>info@fplegaltec.es</span>
-        <span>Calle Mayor, 42 – Madrid</span>
+        <span>+34 676594016</span>
+        <span>miguelfloren@gmail.com</span>
+        <span>Cuesta de San Francisco nº 5 Entlo, CP 30800 Lorca (Murcia)</span>
         <a href="#contacto">Consulta gratuita</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <div class="footer-legal">© 2024 F&amp;P Legaltec — Todos los derechos reservados.</div>
+      <div class="footer-legal" id="footer-legal"></div>
       <div class="footer-links">
-        <a href="#">Aviso legal</a>
-        <a href="#">Privacidad</a>
-        <a href="#">Cookies</a>
+        <a href="aviso-legal.html">Aviso legal</a>
+        <a href="privacidad.html">Privacidad</a>
+        <a href="cookies.html">Cookies</a>
       </div>
     </div>
   </div>
@@ -1453,6 +1453,15 @@ document.getElementById('formSubmit').addEventListener('click', async function()
     errMsg.textContent = 'Error al enviar. Por favor, inténtelo de nuevo o llámenos al +34 676594016.';
   }
 });
+
+// ── COPYRIGHT DINÁMICO ─────────────────────────
+(function() {
+  var now = new Date();
+  var meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  var texto = '© ' + now.getFullYear() + ' — ' + meses[now.getMonth()] + ' · F&P Legaltec · Todos los derechos reservados.';
+  var el = document.getElementById('footer-legal');
+  if (el) el.textContent = texto;
+})();
 
 // ── REVEAL ON SCROLL ───────────────────────────
 if ('IntersectionObserver' in window) {
