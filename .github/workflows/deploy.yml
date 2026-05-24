@@ -7,20 +7,21 @@ on:
 
 jobs:
   deploy:
-    name: Deploy by FTP
+    name: Deploy by FTPS
     runs-on: ubuntu-latest
 
     steps:
       - name: Get latest code
         uses: actions/checkout@v4
 
-      - name: Upload website by FTP
+      - name: Upload website by FTPS
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
-          server: ${{ secrets.FTP_SERVER }}
+          server: cp7028.webempresa.eu
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           port: 21
+          protocol: ftps
           local-dir: ./
           server-dir: /
           exclude: |
