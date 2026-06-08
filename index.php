@@ -193,42 +193,42 @@ include $_SERVER['DOCUMENT_ROOT'] . '/partials/nav.php';
         <div class="card-icon"><i class="ph ph-briefcase"></i></div>
         <h3>Asesoría legal general</h3>
         <p>Orientación jurídica integral para toda situación legal: contratos, reclamaciones, consultas puntuales y acompañamiento continuo con visión estratégica.</p>
-        <a class="card-link" href="#contacto">Consultar <i class="ph ph-arrow-right" style="font-size:12px"></i></a>
+        <a class="card-link" href="/servicios/asesoria-legal-general/">Consultar <i class="ph ph-arrow-right" style="font-size:12px"></i></a>
       </div>
 
       <div class="service-card reveal">
         <div class="card-icon"><i class="ph ph-hard-hat"></i></div>
         <h3>Derecho laboral</h3>
         <p>Defensa del trabajador y asesoramiento a empresas: despidos, EREs, acoso laboral, accidentes de trabajo, reclamaciones salariales y negociación colectiva.</p>
-        <a class="card-link" href="#contacto">Consultar <i class="ph ph-arrow-right" style="font-size:12px"></i></a>
+        <a class="card-link" href="/servicios/derecho-laboral/">Consultar <i class="ph ph-arrow-right" style="font-size:12px"></i></a>
       </div>
 
       <div class="service-card reveal">
         <div class="card-icon"><i class="ph ph-scales"></i></div>
         <h3>Derecho civil</h3>
         <p>Divorcios, herencias, arrendamientos, compraventas inmobiliarias, reclamaciones de cantidad y litigios entre particulares ante los tribunales civiles.</p>
-        <a class="card-link" href="#contacto">Consultar <i class="ph ph-arrow-right" style="font-size:12px"></i></a>
+        <a class="card-link" href="/servicios/derecho-civil/">Consultar <i class="ph ph-arrow-right" style="font-size:12px"></i></a>
       </div>
 
       <div class="service-card reveal">
         <div class="card-icon"><i class="ph ph-storefront"></i></div>
         <h3>Derecho mercantil</h3>
         <p>Constitución de sociedades, contratos mercantiles, fusiones, reclamaciones entre empresas y procesos concursales. Asesoramiento continuo para pymes y startups.</p>
-        <a class="card-link" href="#contacto">Consultar <i class="ph ph-arrow-right" style="font-size:12px"></i></a>
+        <a class="card-link" href="/servicios/derecho-mercantil/">Consultar <i class="ph ph-arrow-right" style="font-size:12px"></i></a>
       </div>
 
       <div class="service-card reveal">
         <div class="card-icon"><i class="ph ph-gavel"></i></div>
         <h3>Derecho penal</h3>
         <p>Defensa integral en procedimientos penales: instrucción, juicio oral, recursos. Especialización en delitos informáticos, económicos y corporativos.</p>
-        <a class="card-link" href="#contacto">Consultar <i class="ph ph-arrow-right" style="font-size:12px"></i></a>
+        <a class="card-link" href="/servicios/derecho-penal/">Consultar <i class="ph ph-arrow-right" style="font-size:12px"></i></a>
       </div>
 
       <div class="service-card reveal">
         <div class="card-icon"><i class="ph ph-globe"></i></div>
         <h3>Derecho de extranjería</h3>
         <p>NIE, residencias, visados de trabajo y estudio, reagrupación familiar, recursos contra denegaciones y tramitación de la nacionalidad española.</p>
-        <a class="card-link" href="#contacto">Consultar <i class="ph ph-arrow-right" style="font-size:12px"></i></a>
+        <a class="card-link" href="/servicios/extranjeria-lorca/">Consultar <i class="ph ph-arrow-right" style="font-size:12px"></i></a>
       </div>
 
     </div>
