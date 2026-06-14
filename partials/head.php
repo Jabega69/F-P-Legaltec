@@ -21,7 +21,9 @@
 <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js"></script>
 <link rel="stylesheet" href="/css/main.css">
 <?php if (!empty($jsonLd)): ?>
-<script type="application/ld+json"><?= $jsonLd ?></script>
+<?php foreach ((array) $jsonLd as $jsonLdBlock): ?>
+<script type="application/ld+json"><?= $jsonLdBlock ?></script>
+<?php endforeach; ?>
 <?php endif; ?>
 <?php if (!empty($extraHead)) echo $extraHead; ?>
 </head>
