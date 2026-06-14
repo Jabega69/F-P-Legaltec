@@ -159,7 +159,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/partials/nav.php';
     </div>
   </header>
 
-  <section id="servicios-legaltech" aria-labelledby="srv-title">
+  <section id="servicios-legaltech" class="section-light" aria-labelledby="srv-title">
     <div class="container">
       <span class="section-label">Servicios tecnológicos</span>
       <h2 id="srv-title">Soluciones jurídicas<br />para el <em>mundo digital</em></h2>
