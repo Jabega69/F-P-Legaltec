@@ -256,7 +256,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/partials/nav.php';
             <div>
               <h4>Protección de datos y privacidad (RGPD)</h4>
               <p>Auditorías de cumplimiento, registro de actividades, delegados de protección de datos y respuesta ante brechas de seguridad.</p>
-              <a class="card-link" href="/legaltech/proteccion-datos-rgpd.php" style="margin-top:8px">Ver servicio RGPD <i class="ph ph-arrow-right" style="font-size:12px"></i></a>
+              <a class="card-link" href="/legaltech/proteccion-datos-rgpd/" style="margin-top:8px">Ver servicio RGPD <i class="ph ph-arrow-right" style="font-size:12px"></i></a>
             </div>
           </div>
           <div class="tech-feature">
