@@ -1,7 +1,7 @@
 <?php
 $ctaTitle = $ctaTitle ?? '¿Necesita asesoramiento jurídico?';
 $ctaDesc  = $ctaDesc  ?? 'Primera consulta gratuita y sin compromiso. Le respondemos en menos de 24 horas.';
-$ctaHref  = $ctaHref  ?? '/contacto/';
+$ctaHref  = $ctaHref  ?? '/#contacto';
 ?>
 <div class="container">
   <div class="cta-banner" role="complementary">

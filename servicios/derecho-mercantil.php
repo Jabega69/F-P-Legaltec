@@ -65,7 +65,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/partials/nav.php';
           Seguridad jurídica para su empresa: constitución de sociedades, contratos mercantiles, reclamación de impagados, derecho societario y concursal. Más de treinta años acompañando a empresas y autónomos de Murcia.
         </p>
         <div class="hero-actions">
-          <a href="/contacto/" class="btn-primary">
+          <a href="/#contacto" class="btn-primary">
             Consulta gratuita
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
@@ -280,7 +280,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/partials/nav.php';
           <cite>— Caso real: pyme del sector servicios, Murcia</cite>
           <div style="background:var(--navy-border);height:1px;margin-bottom:28px"></div>
           <p style="font-size:14px;color:var(--gray);margin-bottom:20px">Resultado: <strong style="color:var(--gold)">cobro íntegro</strong> de la deuda más intereses y costas tras el embargo.</p>
-          <a href="/contacto/" class="btn-primary" style="width:100%;justify-content:center">Consulta gratuita</a>
+          <a href="/#contacto" class="btn-primary" style="width:100%;justify-content:center">Consulta gratuita</a>
           <p style="font-size:11.5px;color:var(--gray);text-align:center;margin-top:12px">Sin compromiso · Respuesta en &lt;24h</p>
         </div>
       </div>

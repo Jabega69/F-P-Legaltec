@@ -65,7 +65,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/partials/nav.php';
           Defendemos los derechos de trabajadores y empresas en despidos, EREs, acoso laboral, reclamaciones salariales e incapacidades. Más de treinta años de experiencia en los juzgados de lo social de Murcia.
         </p>
         <div class="hero-actions">
-          <a href="/contacto/" class="btn-primary">
+          <a href="/#contacto" class="btn-primary">
             Consulta gratuita
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
@@ -280,7 +280,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/partials/nav.php';
           <cite>— Caso real: trabajador de empresa del sector servicios, Lorca</cite>
           <div style="background:var(--navy-border);height:1px;margin-bottom:28px"></div>
           <p style="font-size:14px;color:var(--gray);margin-bottom:20px">Resultado: <strong style="color:var(--gold)">despido declarado nulo</strong> con readmisión y abono de salarios de tramitación.</p>
-          <a href="/contacto/" class="btn-primary" style="width:100%;justify-content:center">Consulta gratuita</a>
+          <a href="/#contacto" class="btn-primary" style="width:100%;justify-content:center">Consulta gratuita</a>
           <p style="font-size:11.5px;color:var(--gray);text-align:center;margin-top:12px">Sin compromiso · Respuesta en &lt;24h</p>
         </div>
       </div>
